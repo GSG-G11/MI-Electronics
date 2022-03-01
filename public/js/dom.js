@@ -18,15 +18,15 @@ const renderResult = (data) => {
   const dataSheet = createElement('td', 'title', 'DataSheet');
   trSecondHead.append(partNumber, manufacturer, description, dataSheet);
   tHead.append(trFirstHead, trSecondHead);
-  const tBody = createElement('tbody', 'tbody');]
+  const tBody = createElement('tbody', 'tbody');
   filtered.forEach((component) => {
     const trTbody = createElement('tr', 'info');
     const partNumberData = createElement('td', null, component.part_number);
     const manufacturerData = createElement('td', null, component.manufacturer);
     const descriptionData = createElement('td', null, component.description);
     const dataSheetData = createElement('td', null);
-    if (component.datasheet_url.length != 0) {
-      const dataSheetLink = createElement('a');  
+    if (component.datasheet_url.length !== 0) {
+      const dataSheetLink = createElement('a');
       dataSheetLink.href = component.datasheet_url;
       dataSheetLink.target = '_BLANK';
       const iconPdf = createElement('i', 'fas fa-file-pdf ');
