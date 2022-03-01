@@ -62,7 +62,7 @@ getElement('#submitForm').addEventListener('submit', (e) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.stock.length !== 0) {
+        if (data.stock?.length !== 0) {
           getElement('.loading').classList.toggle('display');
           renderResult(data.stock);
         } else {
@@ -70,7 +70,8 @@ getElement('#submitForm').addEventListener('submit', (e) => {
           getElement('.loading').classList.toggle('display');
           getElement('.error').textContent = 'this is invalied value';
         }
-      });
+      })
+      .catch((err) => { getElement('.error').textContent = err });
   }
   getElement('#name').value = '';
 });
