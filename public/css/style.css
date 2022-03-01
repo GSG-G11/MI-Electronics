@@ -1,0 +1,81 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --mainColor:#6779A6;
+    --white:#ffffff;
+    --pdfColor:#e20823;
+    --noPdfColor:rgb(170, 169, 169);
+}
+/*************Header Style ************************/
+#name-project {
+    margin:1em 2em ;
+    color: var(--mainColor);
+    font-size: 2.5em;
+    font-weight: bold;
+}
+/*************Main Style ************************/
+#submitForm {
+    width: 80vw;
+    margin: 0 auto;
+}
+#name {
+    width: 80%;
+    height: 3em;
+    padding: 1em;
+    border: 2px solid var(--mainColor);
+    font-size: 1em;
+}
+#submitBtn {
+    height: 3em;
+    width: 19%;
+    background-color: var(--mainColor);
+    color: var(--white);
+    border: 2px solid var(--mainColor);
+    font-size: 1em;
+    font-weight: bold;
+}
+/*************info-section Style ************************/
+#info-section {
+    width: 80vw;
+    margin: 2em auto;
+}
+table {
+    width: 100%;
+}
+table,td,th,tr {
+    border: 1px solid var(--mainColor);
+    border-collapse: collapse;
+    padding: 0.5em;
+}
+table thead tr:first-of-type td {
+    text-align: center;
+}
+.title {
+    font-size: 1.5em;
+    color: var(--mainColor);
+    font-weight: bolder;
+}
+.fa-file-pdf {
+    color:var(--pdfColor) ;
+}
+
+/*************Responsive ************************/
+@media (max-width:768px) {
+    #name-project {
+        text-align: center;
+        font-size: 1.5em;
+    }
+    #name {
+        width: 70%;
+    }
+    #submitBtn {
+        width: 28%;
+    }
+    #info-section {
+        overflow-x: scroll;
+    }
+    
+}
