@@ -43,19 +43,6 @@ const renderResult = (data) => {
   table.append(tHead, tBody);
   infoSection.appendChild(table);
 };
-const searchComponentFetch = (url, input, callback) => {
-  fetch(url, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify({ name: input }),
-  })
-    .then((response) => response.json())
-    .then((data) => callback(data));
-};
-
 getElement('#submitForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const { value } = getElement('#name');
@@ -66,16 +53,6 @@ getElement('#submitForm').addEventListener('submit', (e) => {
   } else {
     getElement('.error').textContent = '';
     getElement('.loading').classList.toggle('display');
-    // searchComponentFetch('/search', value, (data) => {
-    //   if (data.stock.length !== 0) {
-    //     getElement('.loading').classList.toggle('display');
-    //     renderResult(data.stock);
-    //   } else {
-    //     deleteChild(infoSection);
-    //     getElement('.loading').classList.toggle('display');
-    //     getElement('.error').textContent = 'this is invalied value';
-    //   }
-    // });
     fetch('/search', {
       headers: {
         'Content-Type': 'application/json',
