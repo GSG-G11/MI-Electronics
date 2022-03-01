@@ -1,0 +1,32 @@
+{
+  "name": "mi-electronics",
+  "version": "1.0.0",
+  "description": "this website for engineers to get the information about electronics component",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G11/MI-Electronics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G11/MI-Electronics/issues"
+  },
+  "homepage": "https://github.com/GSG-G11/MI-Electronics#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  }
+}
