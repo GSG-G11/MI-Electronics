@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/GSG-G11/MI-Electronics#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "express": "^4.17.3"
   },
   "devDependencies": {
