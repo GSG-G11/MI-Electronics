@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
+const infoSection = getElement('#info-section');
 const renderResult = (data) => {
-  const infoSection = getElement('#info-section');
   deleteChild(infoSection);
-  const filtered = data.stock.filter((item) => item.distributor.distributor_name === 'Digi-Key China');
+  const filtered = data.filter((item) => item.distributor.distributor_name === 'Digi-Key China');
   const table = createElement('table', 'table');
   const tHead = createElement('thead', 'thead');
   const trFirstHead = createElement('tr', 'trFisrtHead');
@@ -43,3 +43,57 @@ const renderResult = (data) => {
   table.append(tHead, tBody);
   infoSection.appendChild(table);
 };
+const searchComponentFetch = (url, input, callback) => {
+  fetch(url, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ name: input }),
+  })
+    .then((response) => response.json())
+    .then((data) => callback(data));
+};
+
+getElement('#submitForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const { value } = getElement('#name');
+  deleteChild(infoSection);
+  if (value.length === 0) {
+    deleteChild(infoSection);
+    getElement('.error').textContent = 'the value must not be empty';
+  } else {
+    getElement('.error').textContent = '';
+    getElement('.loading').classList.toggle('display');
+    // searchComponentFetch('/search', value, (data) => {
+    //   if (data.stock.length !== 0) {
+    //     getElement('.loading').classList.toggle('display');
+    //     renderResult(data.stock);
+    //   } else {
+    //     deleteChild(infoSection);
+    //     getElement('.loading').classList.toggle('display');
+    //     getElement('.error').textContent = 'this is invalied value';
+    //   }
+    // });
+    fetch('/search', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({ component: value }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.stock.length !== 0) {
+          getElement('.loading').classList.toggle('display');
+          renderResult(data.stock);
+        } else {
+          deleteChild(infoSection);
+          getElement('.loading').classList.toggle('display');
+          getElement('.error').textContent = 'this is invalied value';
+        }
+      });
+  }
+  getElement('#name').value = '';
+});
