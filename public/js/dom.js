@@ -4,15 +4,15 @@ const infoSection = getElement('#info-section');
 const renderResult = (data) => {
   console.log('data from render', data);
   deleteChild(infoSection);
-  const filtered = data.filter((item) => item.distributor?.distributor_name === 'Digi-Key China');
+  // const filtered = data.filter((item) => item.distributor?.distributor_name === 'Digi-Key China');
   const table = createElement('table', 'table');
   const tHead = createElement('thead', 'thead');
   const trFirstHead = createElement('tr', 'trFisrtHead');
   const tdFirstTR = createElement('td', 'tdFisrtTR');
   tdFirstTR.colSpan = '4';
-  const logo = createImage('img', null, 'logo', filtered[0].distributor?.distributor_logo);
-  tdFirstTR.appendChild(logo);
-  trFirstHead.appendChild(tdFirstTR);
+  // const logo = createImage('img', null, 'logo', filtered[0].distributor?.distributor_logo);
+  // tdFirstTR.appendChild(logo);
+  // trFirstHead.appendChild(tdFirstTR);
   const trSecondHead = createElement('tr', 'trSecondHead');
   const partNumber = createElement('td', 'title', 'Part Number');
   const manufacturer = createElement('td', 'title', 'manufacturer');
@@ -21,7 +21,7 @@ const renderResult = (data) => {
   trSecondHead.append(partNumber, manufacturer, description, dataSheet);
   tHead.append(trFirstHead, trSecondHead);
   const tBody = createElement('tbody', 'tbody');
-  filtered.forEach((component) => {
+  data.slice(0, 20).forEach((component) => {
     const trTbody = createElement('tr', 'info');
     const partNumberData = createElement('td', null, component.part_number);
     const manufacturerData = createElement('td', null, component.manufacturer);
