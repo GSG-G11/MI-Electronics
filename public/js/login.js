@@ -1,10 +1,22 @@
-const loginBtn = document.getElementById('login-btn');
-const password = document.getElementById('password');
-const username = document.getElementById('username');
+/* eslint-disable no-undef */
+const loginBtn = getElement('#login-btn');
+const password = getElement('#password');
+const username = getElement('#username');
+const errorInput = document.querySelector('#error-input');
+const errorPassword = getElement('#error-password');
 
 loginBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  if (password.value !== '' && username.value !== '') {
+  if (password.value.length === 0 && username.value.length === 0) {
+    errorInput.textContent = 'name must not be empty';
+    errorPassword.textContent = 'password must not be empty';
+  } else if (!containsUppercase(username.value)) {
+    errorInput.textContent = 'name must be uppercase letter';
+  } else if (!containsUppercase(password.value) || !containsNumber(password.value)) {
+    errorInput.textContent = '';
+    errorPassword.textContent = 'Must at least contain one number and uppercase letter';
+  } else {
+    errorPassword.textContent = '';
     window.location.href = '/html/app.html';
   }
 });

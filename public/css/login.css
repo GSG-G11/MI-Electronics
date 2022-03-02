@@ -83,3 +83,7 @@ header h1{
 	margin-top: 20px;
 	width: 100%;
 }
+#error-input,
+#error-password {
+	color:#e20823 !important;
+}
