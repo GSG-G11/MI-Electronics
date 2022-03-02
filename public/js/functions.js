@@ -26,3 +26,25 @@ const createImage = (tag, nameClass = '', alt = 'image', src = '#') => {
   element.src = src;
   return element;
 };
+const containsUppercase = (text) => {
+  for (let i = 0; i < text.length; i += 1) {
+    if (
+      // eslint-disable-next-line no-restricted-globals
+      isNaN(text.charAt(i)) && text.charAt(i) === text.charAt(i).toUpperCase()
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};
+const containsNumber = (text) => {
+  for (let i = 0; i < text.length; i += 1) {
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(text.charAt(i)) && !(text.charAt(i) === ' ')) {
+      return true;
+    }
+  }
+
+  return false;
+};
