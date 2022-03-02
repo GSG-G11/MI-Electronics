@@ -1,14 +1,16 @@
 /* eslint-disable no-undef */
 const infoSection = getElement('#info-section');
+
 const renderResult = (data) => {
+  console.log('data from render', data);
   deleteChild(infoSection);
-  const filtered = data.filter((item) => item.distributor.distributor_name === 'Digi-Key China');
+  const filtered = data.filter((item) => item.distributor?.distributor_name === 'Digi-Key China');
   const table = createElement('table', 'table');
   const tHead = createElement('thead', 'thead');
   const trFirstHead = createElement('tr', 'trFisrtHead');
   const tdFirstTR = createElement('td', 'tdFisrtTR');
   tdFirstTR.colSpan = '4';
-  const logo = createImage('img', null, 'logo', filtered[0].distributor.distributor_logo);
+  const logo = createImage('img', null, 'logo', filtered[0].distributor?.distributor_logo);
   tdFirstTR.appendChild(logo);
   trFirstHead.appendChild(tdFirstTR);
   const trSecondHead = createElement('tr', 'trSecondHead');
@@ -62,7 +64,9 @@ getElement('#submitForm').addEventListener('submit', (e) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.stock?.length !== 0) {
+          console.log('Hi form data stock');
           getElement('.loading').classList.toggle('display');
           renderResult(data.stock);
         } else {
