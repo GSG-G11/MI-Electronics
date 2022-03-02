@@ -21,7 +21,8 @@ const renderResult = (data) => {
   trSecondHead.append(partNumber, manufacturer, description, dataSheet);
   tHead.append(trFirstHead, trSecondHead);
   const tBody = createElement('tbody', 'tbody');
-  data.slice(0, 20).forEach((component) => {
+  data.slice(20).forEach((component) => {
+    console.log(component.distributor?.distributor_name)
     const trTbody = createElement('tr', 'info');
     const partNumberData = createElement('td', null, component.part_number);
     const manufacturerData = createElement('td', null, component.manufacturer);
