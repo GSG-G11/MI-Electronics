@@ -2,50 +2,48 @@
 const infoSection = getElement('#info-section');
 
 const renderResult = (data) => {
-  console.log('data from render', data);
   deleteChild(infoSection);
-  const filtered = data.filter((item) => item?.distributor?.distributor_name === 'Digi-Key China');
-  console.log(filtered.length);
-  const table = createElement('table', 'table');
-  const tHead = createElement('thead', 'thead');
-  const trFirstHead = createElement('tr', 'trFisrtHead');
-  const tdFirstTR = createElement('td', 'tdFisrtTR');
-  tdFirstTR.colSpan = '4';
-  const logo = createImage('img', null, 'logo', filtered[0]?.distributor?.distributor_logo);
-  tdFirstTR.appendChild(logo);
-  trFirstHead.appendChild(tdFirstTR);
-  const trSecondHead = createElement('tr', 'trSecondHead');
-  const partNumber = createElement('td', 'title', 'Part Number');
-  const manufacturer = createElement('td', 'title', 'manufacturer');
-  const description = createElement('td', 'title', 'Description');
-  const dataSheet = createElement('td', 'title', 'DataSheet');
-  trSecondHead.append(partNumber, manufacturer, description, dataSheet);
-  tHead.append(trFirstHead, trSecondHead);
-  const tBody = createElement('tbody', 'tbody');
-  filtered.forEach((component) => {
-    console.log(component.distributor?.distributor_name)
-    const trTbody = createElement('tr', 'info');
-    const partNumberData = createElement('td', null, component.part_number);
-    const manufacturerData = createElement('td', null, component.manufacturer);
-    const descriptionData = createElement('td', null, component.description);
-    const dataSheetData = createElement('td', null);
-    if (component.datasheet_url.length !== 0) {
-      const dataSheetLink = createElement('a');
-      dataSheetLink.href = component.datasheet_url;
-      dataSheetLink.target = '_BLANK';
-      const iconPdf = createElement('i', 'fas fa-file-pdf ');
-      dataSheetLink.appendChild(iconPdf);
-      dataSheetData.appendChild(dataSheetLink);
-    } else {
-      const iconPdf = createElement('i', 'fas fa-file-pdf ');
-      iconPdf.classList.add('fa-file-pdf-null');
-      dataSheetData.appendChild(iconPdf);
-    }
-    trTbody.append(partNumberData, manufacturerData, descriptionData, dataSheetData);
-    tBody.appendChild(trTbody);
+  Object.values(data).forEach((val) => {
+    const table = createElement('table', 'table');
+    const tHead = createElement('thead', 'thead');
+    const trFirstHead = createElement('tr', 'trFisrtHead');
+    const tdFirstTR = createElement('td', 'tdFisrtTR');
+    tdFirstTR.colSpan = '4';
+    const logo = createImage('img', null, 'logo', Object.values(val)[0].distributor.distributor_logo);
+    tdFirstTR.appendChild(logo);
+    trFirstHead.appendChild(tdFirstTR);
+    const trSecondHead = createElement('tr', 'trSecondHead');
+    const partNumber = createElement('td', 'title', 'Part Number');
+    const manufacturer = createElement('td', 'title', 'manufacturer');
+    const description = createElement('td', 'title', 'Description');
+    const dataSheet = createElement('td', 'title', 'DataSheet');
+    trSecondHead.append(partNumber, manufacturer, description, dataSheet);
+    tHead.append(trFirstHead, trSecondHead);
+    const tBody = createElement('tbody', 'tbody');
+    table.append(tHead, tBody);
+    infoSection.appendChild(table);
+    Object.values(val).forEach((ele) => {
+      const trTbody = createElement('tr', 'info');
+      const partNumberData = createElement('td', null, ele.part_number);
+      const manufacturerData = createElement('td', null, ele.manufacturer);
+      const descriptionData = createElement('td', null, ele.description);
+      const dataSheetData = createElement('td', null);
+      if (ele.datasheet_url.length !== 0) {
+        const dataSheetLink = createElement('a');
+        dataSheetLink.href = ele.datasheet_url;
+        dataSheetLink.target = '_BLANK';
+        const iconPdf = createElement('i', 'fas fa-file-pdf ');
+        dataSheetLink.appendChild(iconPdf);
+        dataSheetData.appendChild(dataSheetLink);
+      } else {
+        const iconPdf = createElement('i', 'fas fa-file-pdf ');
+        iconPdf.classList.add('fa-file-pdf-null');
+        dataSheetData.appendChild(iconPdf);
+      }
+      trTbody.append(partNumberData, manufacturerData, descriptionData, dataSheetData);
+      tBody.appendChild(trTbody);
+    });
   });
-  table.append(tHead, tBody);
-  infoSection.appendChild(table);
 };
 getElement('#submitForm').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -66,9 +64,7 @@ getElement('#submitForm').addEventListener('submit', (e) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.stock?.length !== 0) {
-          console.log('Hi form data stock');
           getElement('.loading').classList.toggle('display');
           renderResult(data.stock);
         } else {
@@ -77,7 +73,7 @@ getElement('#submitForm').addEventListener('submit', (e) => {
           getElement('.error').textContent = 'this is invalied value';
         }
       })
-      .catch((err) => { getElement('.error').textContent = err });
+      .catch((err) => { getElement('.error').textContent = err; });
   }
   getElement('#name').value = '';
 });
