@@ -2,7 +2,7 @@
 const loginBtn = getElement('#login-btn');
 const password = getElement('#password');
 const username = getElement('#username');
-const errorInput = document.querySelector('#error-input');
+const errorInput = getElement('#error-input');
 const errorPassword = getElement('#error-password');
 
 loginBtn.addEventListener('click', (e) => {

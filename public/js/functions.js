@@ -37,7 +37,7 @@ const containsUppercase = (text) => {
   }
 
   return false;
-}
+};
 const containsNumber = (text) => {
   for (let i = 0; i < text.length; i += 1) {
     // eslint-disable-next-line no-restricted-globals
