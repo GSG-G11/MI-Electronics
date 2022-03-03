@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 const infoSection = getElement('#info-section');
+const username = getElement('.username');
+username.textContent = localStorage.getItem('username');
 
 const renderResult = (data) => {
   deleteChild(infoSection);
@@ -76,4 +78,17 @@ getElement('#submitForm').addEventListener('submit', (e) => {
       .catch((err) => { getElement('.error').textContent = err; });
   }
   getElement('#name').value = '';
+});
+
+const scrollFunction = () => {
+  if (document.documentElement.scrollTop > 500) {
+    getElement('.btn-Up').style.display = 'block';
+  } else {
+    getElement('.btn-Up').style.display = 'none';
+  }
+};
+window.onscroll = () => scrollFunction();
+
+getElement('.btn-Up').addEventListener('click', () => {
+  document.documentElement.scrollTop = 0;
 });

@@ -17,6 +17,7 @@ loginBtn.addEventListener('click', (e) => {
     errorPassword.textContent = 'Must at least contain one number and uppercase letter';
   } else {
     errorPassword.textContent = '';
+    localStorage.setItem('username', username.value);
     window.location.href = '/html/app.html';
   }
 });
