@@ -18,16 +18,23 @@
 <body>
     <header>
         <h1 id="name-project">MI-Electronics</h1>
+        <div class="name-logout">
+            <span class="username"></span>
+            <a href="/"><i class="fas fa-sign-out"></i></a>
+        </div>
     </header>
     <main>
         <form id="submitForm">
-            <input type="text" name="name" id="name" placeholder="enter component number"/>
+            <input type="text" name="name" id="name" placeholder="enter component number or name (e.g:ne555)"/>
             <button type="submit" id="submitBtn">Search</button>
         </form>
         <span class="error"></span>
     </main>
     <section id="info-section">
-        
+        <div class="search">
+            <h2>Search for Component what you want</h2>
+            <img src="../assets/background.jpg" alt="component image"/>
+        </div>
     </section>
     <div class="loading display">
       <div class="lds-spinner">
@@ -45,6 +52,8 @@
         <div></div>
       </div>
     </div>
+
+    <div class="btn-Up"><i class="fas fa-arrow-alt-square-up"></i></div>
     <script src="../js/functions.js"></script>
     <script src="../js/dom.js"></script>
 </body>
